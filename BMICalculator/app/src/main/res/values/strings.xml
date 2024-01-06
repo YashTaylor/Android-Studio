@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BMICalculator</string>
+    <string name="weight">Enter your weight: </string>
+    <string name="heightFT">Enter your height: </string>
+    <string name="height">Enter your height(inches): </string>
+
+</resources>
