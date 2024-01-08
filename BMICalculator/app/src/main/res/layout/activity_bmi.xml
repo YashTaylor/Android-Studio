@@ -8,7 +8,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:gravity="center"
-    tools:context=".MainActivity">
+    tools:context=".BMI">
 
     <EditText
         android:id="@+id/weight"
@@ -22,7 +22,7 @@
         android:id="@+id/heightFT"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Enter your height: "
+        android:hint="Enter your height(ft): "
         android:inputType="number"
         android:layout_marginTop="11dp"/>
 

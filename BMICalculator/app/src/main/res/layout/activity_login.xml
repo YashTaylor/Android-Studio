@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:gravity="center"
+    tools:context=".BMI">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="BMI Calculator"
+        android:layout_marginTop="100dp"
+        android:textStyle="bold"
+        android:textSize="32sp"
+        android:layout_above="@+id/username"/>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="400dp"
+        android:orientation="vertical"
+        android:gravity="center">
+
+        <EditText
+            android:id="@+id/usernameLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="11dp"
+            android:ems="15"
+            android:hint="Username"
+            android:inputType="text"
+            android:textAlignment="center"
+            android:drawableLeft="@drawable/username"/>
+
+        <EditText
+            android:id="@+id/passwordLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="50dp"
+            android:layout_below="@+id/usernameLogin"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="11dp"
+            android:ems="15"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:textAlignment="center"
+            android:drawableLeft="@drawable/password"/>
+
+        <Button
+            android:id="@+id/btnLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Login"
+            android:backgroundTint="#321B1B"
+            android:layout_centerInParent="true"
+            android:layout_marginTop="11dp"
+            android:layout_below="@+id/text"/>
+
+    </LinearLayout>
+
+</LinearLayout>
