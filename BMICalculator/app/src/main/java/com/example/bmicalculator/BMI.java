@@ -3,6 +3,7 @@ package com.example.bmicalculator;
 import androidx.appcompat.app.AppCompatActivity;
 
 import android.annotation.SuppressLint;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -13,7 +14,7 @@ import android.widget.Toast;
 
 public class BMI extends AppCompatActivity {
 
-    Button btnCalculate;
+    Button btnCalculate, btnLogout, btnFetch;
     TextView result;
     EditText height, heightFT, weight;
     LinearLayout LLMain;
@@ -27,40 +28,66 @@ public class BMI extends AppCompatActivity {
 
         // Calculator
         btnCalculate = findViewById(R.id.btnCalculate);
+        btnLogout = findViewById(R.id.btnLogout);
+        btnFetch = findViewById(R.id.btnFetch);
         result = findViewById(R.id.result);
         height = findViewById(R.id.height);
         heightFT = findViewById(R.id.heightFT);
         weight = findViewById(R.id.weight);
         LLMain = findViewById(R.id.LLMain);
+        db1 = new DBHelperBMI(this);
 
         btnCalculate.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                int wt = Integer.parseInt(weight.getText().toString());
-                int in = Integer.parseInt(height.getText().toString());
-                int ft = Integer.parseInt(heightFT.getText().toString());
+                int wt = Integer.valueOf(weight.getText().toString().trim());
+                int ft = Integer.valueOf(heightFT.getText().toString().trim());
+                int in = Integer.valueOf(height.getText().toString().trim());
 
                 int totalIn = ft * 12 + in;
                 double totalCm = totalIn * 2.53;
                 double totalM = totalCm / 100;
-                long bmi = (long) (wt / (totalM * totalM));
-                boolean insert = db1.insertDataBMI(wt, in, ft, bmi);
 
-                if (bmi > 25) {
-                    result.setText("You are Overweight.");
+                long result = (long) (wt / (totalM * totalM));
+//                result.setText("Result: " + bmi);
+                if (result > 25) {
                     LLMain.setBackgroundColor(getResources().getColor(R.color.colorOW));
-                } else if (bmi < 18) {
-                    result.setText("You are Underweight.");
+                } else if (result < 18) {
                     LLMain.setBackgroundColor(getResources().getColor(R.color.colorUW));
                 } else {
-                    result.setText("You are Healthy.");
                     LLMain.setBackgroundColor(getResources().getColor(R.color.colorH));
+                }
+                if (weight.equals("") || heightFT.equals("") || height.equals("")) {
+                    Toast.makeText(BMI.this, "All fields are mandatory", Toast.LENGTH_SHORT).show();
+                } else {
+                    boolean insert = db1.insertDataBMI(wt, ft, in, result);
+                    if (insert) {
+                        Toast.makeText(BMI.this, "Inserted Successfully", Toast.LENGTH_SHORT).show();
+                    } else {
+                        Toast.makeText(BMI.this, "Insertion failed", Toast.LENGTH_SHORT).show();
+                    }
                 }
 
             }
         });
 
+        //Fetch Data
+        btnFetch.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BMI.this, FetchDataActivity.class);
+                startActivity(intent);
+            }
+        });
 
 
+        // Logout
+        btnLogout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(BMI.this, Login.class);
+                startActivity(intent);
+            }
+        });
     }
 }

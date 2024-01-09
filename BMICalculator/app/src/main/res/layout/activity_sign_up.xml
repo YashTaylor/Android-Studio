@@ -41,7 +41,6 @@
             android:id="@+id/passwordSignup"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_below="@+id/usernameSignup"
             android:layout_centerInParent="true"
             android:layout_marginTop="11dp"
             android:ems="15"
@@ -54,7 +53,6 @@
             android:id="@+id/confirmPasswordSignup"
             android:layout_width="wrap_content"
             android:layout_height="50dp"
-            android:layout_below="@+id/passwordSignup"
             android:layout_centerInParent="true"
             android:layout_marginTop="11dp"
             android:ems="15"
@@ -70,8 +68,7 @@
             android:text="Sign Up"
             android:backgroundTint="#321B1B"
             android:layout_centerInParent="true"
-            android:layout_marginTop="11dp"
-            android:layout_below="@+id/confirmPasswordSignup"/>
+            android:layout_marginTop="11dp"/>
 
         <TextView
             android:id="@+id/text"
