@@ -80,6 +80,14 @@ public class BMI extends AppCompatActivity {
             }
         });
 
+        //Delete
+//        btnDelete.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//            }
+//        });
+
 
         // Logout
         btnLogout.setOnClickListener(new View.OnClickListener() {

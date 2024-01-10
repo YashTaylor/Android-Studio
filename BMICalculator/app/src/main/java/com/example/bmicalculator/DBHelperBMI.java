@@ -49,5 +49,11 @@ public class DBHelperBMI extends SQLiteOpenHelper {
         Cursor cursor = db1.rawQuery("select * from bmi_data", null);
         return cursor;
     }
+    //Delete
+//    public boolean deleteData(int id) {
+//        SQLiteDatabase db1 = this.getWritableDatabase();
+//        int result = db1.delete("bmi_data", "id=?", new String[]{String.valueOf(id)});
+//        return result > 0;
+//    }
 
 }

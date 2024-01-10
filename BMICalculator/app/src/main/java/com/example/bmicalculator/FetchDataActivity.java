@@ -40,7 +40,6 @@ public class FetchDataActivity extends AppCompatActivity {
         Cursor cursor = db1.fetchData();
         if (cursor.getCount()==0) {
             Toast.makeText(this, "No data exists", Toast.LENGTH_SHORT).show();
-            return;
         } else {
             while (cursor.moveToNext()) {
                 weight.add(cursor.getString(1));

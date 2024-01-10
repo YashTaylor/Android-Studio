@@ -5,6 +5,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -13,7 +14,7 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private Context context;
-    private ArrayList RvWeight, RvHeightFT, RvHeight, RvResult;
+    public ArrayList RvWeight, RvHeightFT, RvHeight, RvResult;
 
     public MyAdapter(Context context, ArrayList RvWeight, ArrayList RvHeightFT, ArrayList RvHeight, ArrayList RvResult) {
         this.context = context;
@@ -43,7 +44,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return RvWeight.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder {
+    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
         TextView RvWeight, RvHeightFT, RvHeight, RvResult;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -51,6 +52,17 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             RvHeightFT = itemView.findViewById(R.id.RvHeightFT);
             RvHeight = itemView.findViewById(R.id.RvHeight);
             RvResult = itemView.findViewById(R.id.RvResult);
+
+            itemView.setOnLongClickListener(this);// new added for delete
+        }
+
+        @Override
+        public boolean onLongClick(View view) {
+            int position = getAdapterPosition();
+            Toast.makeText(context, "Deleted", Toast.LENGTH_LONG).show();
+//          .remove(position); // ISSUE HERE
+            notifyItemRemoved(position);
+            return true;
         }
     }
 }
