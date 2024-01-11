@@ -25,11 +25,11 @@ public class FetchDataActivity extends AppCompatActivity {
 
         db1 = new DBHelperBMI(this);
         recyclerview = findViewById(R.id.recyclerview);
-        displayData();
+//        displayData();
 
     }
 
-    private void displayData() {
+    public void displayData() {
         Cursor cursor = db1.fetchData();
         ArrayList<Model> dataList = new ArrayList<>();
         if (cursor.getCount()==0) {

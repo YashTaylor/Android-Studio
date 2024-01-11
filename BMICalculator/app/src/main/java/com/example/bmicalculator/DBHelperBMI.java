@@ -10,19 +10,19 @@ import androidx.annotation.Nullable;
 
 public class DBHelperBMI extends SQLiteOpenHelper {
 
-    private static final String DATABASE_NAME ="BMIData";
+    private static final String DATABASE_NAME ="BMIDataTest";
     public DBHelperBMI(@Nullable Context context) {
         super(context, DATABASE_NAME, null, 1);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db1) {
-        db1.execSQL("create table bmi_data (id INTEGER PRIMARY KEY AUTOINCREMENT, weight INTEGER, heightFT INTEGER, height INTEGER, result LONG)");
+        db1.execSQL("create table bmidatatest (weight INTEGER PRIMARY KEY, heightFT INTEGER, height INTEGER, result LONG)");
     }
 
     @Override
     public void onUpgrade(SQLiteDatabase db1, int i, int i1) {
-        db1.execSQL("drop table if exists bmi_data");
+        db1.execSQL("drop table if exists bmidatatest");
         onCreate(db1);
     }
 
@@ -36,7 +36,7 @@ public class DBHelperBMI extends SQLiteOpenHelper {
         content.put("height", height);
         content.put("result", result);
 
-        long results = db1.insert("bmi_data", null, content);
+        long results = db1.insert("bmidatatest", null, content);
 
         if (results == -1) {
             return false;
@@ -47,7 +47,22 @@ public class DBHelperBMI extends SQLiteOpenHelper {
 
     public Cursor fetchData() {
         SQLiteDatabase db1 = this.getReadableDatabase();
-        Cursor cursor = db1.rawQuery("select * from bmi_data", null);
+        Cursor cursor = db1.rawQuery("select * from bmidatatest", null);
         return cursor;
+    }
+
+    public boolean deleteData(int weight){
+        SQLiteDatabase db1 = this.getWritableDatabase();;
+        Cursor cursor = db1.rawQuery("select * from bmidatatest where weight = ?", new String[]{String.valueOf(weight)});
+        if (cursor.getCount() > 0) {
+            long results = db1.delete("bmidatatest", "weight=?", new String[]{String.valueOf(weight)});
+            if (results == -1){
+                return false;
+            } else {
+                return true;
+            }
+        } else {
+            return  false;
+        }
     }
 }

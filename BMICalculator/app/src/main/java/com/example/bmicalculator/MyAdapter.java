@@ -43,7 +43,7 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
         return dataList.size();
     }
 
-    public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
+    public class MyViewHolder extends RecyclerView.ViewHolder {
         TextView RvWeight, RvHeightFT, RvHeight, RvResult;
         public MyViewHolder(@NonNull View itemView) {
             super(itemView);
@@ -52,16 +52,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             RvHeight = itemView.findViewById(R.id.RvHeight);
             RvResult = itemView.findViewById(R.id.RvResult);
 
-            itemView.setOnLongClickListener(this);
+//            itemView.setOnLongClickListener(this);
         }
 
-        @Override
-        public boolean onLongClick(View view) {
-            int position = getAdapterPosition();
-            Toast.makeText(context, "Deleted", Toast.LENGTH_LONG).show();
-            dataList.remove(position);
-            notifyItemRemoved(position);
-            return true;
-        }
+//        @Override
+//        public boolean onLongClick(View view) {
+//            int position = getAdapterPosition();
+//            Toast.makeText(context, "Deleted", Toast.LENGTH_LONG).show();
+//            dataList.remove(position);
+//            notifyItemRemoved(position);
+//            return true;
+//        }
     }
 }
