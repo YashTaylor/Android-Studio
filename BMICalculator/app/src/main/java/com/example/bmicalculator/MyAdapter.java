@@ -14,14 +14,12 @@ import java.util.ArrayList;
 
 public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
     private Context context;
-    public ArrayList RvWeight, RvHeightFT, RvHeight, RvResult;
+//    public ArrayList RvWeight, RvHeightFT, RvHeight, RvResult;
+    private ArrayList<Model> dataList = new ArrayList<Model>();
 
-    public MyAdapter(Context context, ArrayList RvWeight, ArrayList RvHeightFT, ArrayList RvHeight, ArrayList RvResult) {
+    public MyAdapter(Context context, ArrayList<Model> dataList) {
         this.context = context;
-        this.RvWeight = RvWeight;
-        this.RvHeightFT = RvHeightFT;
-        this.RvHeight = RvHeight;
-        this.RvResult = RvResult;
+        this.dataList = dataList;
     }
 
     @NonNull
@@ -33,15 +31,16 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull MyViewHolder holder, int position) {
-        holder.RvWeight.setText(String.valueOf(RvWeight.get(position)));
-        holder.RvHeightFT.setText(String.valueOf(RvHeightFT.get(position)));
-        holder.RvHeight.setText(String.valueOf(RvHeight.get(position)));
-        holder.RvResult.setText(String.valueOf(RvResult.get(position)));
+        final Model model = dataList.get(position);
+        holder.RvWeight.setText(String.valueOf(model.getWeight()));
+        holder.RvHeightFT.setText(String.valueOf(model.getHeightFT()));
+        holder.RvHeight.setText(String.valueOf(model.getHeight()));
+        holder.RvResult.setText(String.valueOf(model.getResult()));
     }
 
     @Override
     public int getItemCount() {
-        return RvWeight.size();
+        return dataList.size();
     }
 
     public class MyViewHolder extends RecyclerView.ViewHolder implements View.OnLongClickListener {
@@ -53,14 +52,14 @@ public class MyAdapter extends RecyclerView.Adapter<MyAdapter.MyViewHolder> {
             RvHeight = itemView.findViewById(R.id.RvHeight);
             RvResult = itemView.findViewById(R.id.RvResult);
 
-            itemView.setOnLongClickListener(this);// new added for delete
+            itemView.setOnLongClickListener(this);
         }
 
         @Override
         public boolean onLongClick(View view) {
             int position = getAdapterPosition();
             Toast.makeText(context, "Deleted", Toast.LENGTH_LONG).show();
-//          .remove(position); // ISSUE HERE
+            dataList.remove(position);
             notifyItemRemoved(position);
             return true;
         }

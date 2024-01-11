@@ -23,6 +23,7 @@ public class DBHelperBMI extends SQLiteOpenHelper {
     @Override
     public void onUpgrade(SQLiteDatabase db1, int i, int i1) {
         db1.execSQL("drop table if exists bmi_data");
+        onCreate(db1);
     }
 
     public boolean insertDataBMI(int weight, int heightFT, int height, long result) {
@@ -49,11 +50,4 @@ public class DBHelperBMI extends SQLiteOpenHelper {
         Cursor cursor = db1.rawQuery("select * from bmi_data", null);
         return cursor;
     }
-    //Delete
-//    public boolean deleteData(int id) {
-//        SQLiteDatabase db1 = this.getWritableDatabase();
-//        int result = db1.delete("bmi_data", "id=?", new String[]{String.valueOf(id)});
-//        return result > 0;
-//    }
-
 }

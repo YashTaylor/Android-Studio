@@ -49,7 +49,6 @@ public class BMI extends AppCompatActivity {
                 double totalM = totalCm / 100;
 
                 long result = (long) (wt / (totalM * totalM));
-//                result.setText("Result: " + bmi);
                 if (result > 25) {
                     LLMain.setBackgroundColor(getResources().getColor(R.color.colorOW));
                 } else if (result < 18) {
@@ -79,15 +78,6 @@ public class BMI extends AppCompatActivity {
                 startActivity(intent);
             }
         });
-
-        //Delete
-//        btnDelete.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//            }
-//        });
-
 
         // Logout
         btnLogout.setOnClickListener(new View.OnClickListener() {

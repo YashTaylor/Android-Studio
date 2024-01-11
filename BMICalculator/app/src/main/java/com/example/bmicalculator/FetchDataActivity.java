@@ -13,7 +13,7 @@ import java.util.ArrayList;
 
 public class FetchDataActivity extends AppCompatActivity {
     RecyclerView recyclerview;
-    ArrayList weight, heightFT, height, result;
+//    ArrayList<Model> dataList = new ArrayList<>();
     DBHelperBMI db1;
     MyAdapter adapter;
 
@@ -24,29 +24,27 @@ public class FetchDataActivity extends AppCompatActivity {
         setContentView(R.layout.activity_fetch_data);
 
         db1 = new DBHelperBMI(this);
-        weight = new ArrayList();
-        heightFT = new ArrayList();
-        height = new ArrayList();
-        result = new ArrayList();
         recyclerview = findViewById(R.id.recyclerview);
-        adapter = new MyAdapter(this, weight, heightFT, height, result);
-        recyclerview.setAdapter(adapter);
-        recyclerview.setLayoutManager(new LinearLayoutManager(this));
         displayData();
 
     }
 
     private void displayData() {
         Cursor cursor = db1.fetchData();
+        ArrayList<Model> dataList = new ArrayList<>();
         if (cursor.getCount()==0) {
             Toast.makeText(this, "No data exists", Toast.LENGTH_SHORT).show();
         } else {
             while (cursor.moveToNext()) {
-                weight.add(cursor.getString(1));
-                heightFT.add(cursor.getString(2));
-                height.add(cursor.getString(3));
-                result.add(cursor.getString(4));
+                int weight = cursor.getInt(1);
+                int heightFT = cursor.getInt(2);
+                int height = cursor.getInt(3);
+                int result = cursor.getInt(4);
+                dataList.add(new Model(weight, heightFT, height, result));
             }
+            adapter = new MyAdapter(this, dataList);
+            recyclerview.setAdapter(adapter);
+            recyclerview.setLayoutManager(new LinearLayoutManager(this));
         }
     }
 }
